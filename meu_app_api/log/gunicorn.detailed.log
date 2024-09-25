@@ -1,0 +1,51 @@
+[2023-07-14 13:28:34,066] INFO _log() L224   * Running on all addresses (0.0.0.0)
+   WARNING: This is a development server. Do not use it in a production deployment.
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.40:5000 (Press CTRL+C to quit) - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-07-14 13:28:34,112] INFO _log() L224   * Restarting with stat - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-07-14 13:45:51,579] INFO _log() L224  127.0.0.1 - - [14/Jul/2023 13:45:51] "GET /openapi/swagger HTTP/1.1" 200 - - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-07-14 13:45:51,723] INFO _log() L224  127.0.0.1 - - [14/Jul/2023 13:45:51] "[36mGET /openapi/static/css/swagger-ui.css HTTP/1.1[0m" 304 - - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-07-14 13:45:51,914] INFO _log() L224  127.0.0.1 - - [14/Jul/2023 13:45:51] "[36mGET /openapi/static/js/swagger-ui-bundle.js HTTP/1.1[0m" 304 - - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-07-14 13:45:52,133] INFO _log() L224  127.0.0.1 - - [14/Jul/2023 13:45:52] "[36mGET /openapi/static/js/swagger-ui-standalone-preset.js HTTP/1.1[0m" 304 - - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-07-14 13:45:52,540] INFO _log() L224  127.0.0.1 - - [14/Jul/2023 13:45:52] "GET /openapi/openapi.json HTTP/1.1" 200 - - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-07-14 13:45:52,595] INFO _log() L224  127.0.0.1 - - [14/Jul/2023 13:45:52] "[36mGET /openapi/static/images/swagger.svg HTTP/1.1[0m" 304 - - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-07-14 13:47:21,466] DEBUG add_jogo() L41   Adicionando jogo de nome: 'teste' - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\app.py L41  
+[2023-07-14 13:47:21,472] WARNING add_jogo() L56   Erro ao adicionar jogo 'teste', jogo de mesmo nome já salvo na base :/ - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\app.py L56  
+[2023-07-14 13:47:21,473] INFO _log() L224  127.0.0.1 - - [14/Jul/2023 13:47:21] "[31m[1mPOST /jogo HTTP/1.1[0m" 409 - - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-07-14 13:47:28,865] DEBUG get_jogos() L73   Coletando jogos  - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\app.py L73  
+[2023-07-14 13:47:28,879] DEBUG get_jogos() L83   3 rodutos econtrados - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\app.py L83  
+[2023-07-14 13:47:28,886] INFO _log() L224  127.0.0.1 - - [14/Jul/2023 13:47:28] "GET /jogos HTTP/1.1" 200 - - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-07-14 13:47:31,377] DEBUG get_jogos() L73   Coletando jogos  - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\app.py L73  
+[2023-07-14 13:47:31,383] DEBUG get_jogos() L83   3 rodutos econtrados - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\app.py L83  
+[2023-07-14 13:47:31,387] INFO _log() L224  127.0.0.1 - - [14/Jul/2023 13:47:31] "GET /jogos HTTP/1.1" 200 - - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-07-14 13:47:44,581] DEBUG add_jogo() L41   Adicionando jogo de nome: 'teste 4' - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\app.py L41  
+[2023-07-14 13:47:44,687] DEBUG add_jogo() L50   Adicionado jogo de nome: 'teste 4' - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\app.py L50  
+[2023-07-14 13:47:44,690] INFO _log() L224  127.0.0.1 - - [14/Jul/2023 13:47:44] "POST /jogo HTTP/1.1" 200 - - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-07-14 13:47:58,403] INFO _log() L224  127.0.0.1 - - [14/Jul/2023 13:47:58] "OPTIONS /jogo?id=4 HTTP/1.1" 200 - - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-07-14 13:47:58,410] DEBUG del_jogo() L102  Deletando dados sobre jogo #Dark cats 3 - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\app.py L102 
+[2023-07-14 13:47:58,516] DEBUG del_jogo() L110  Deletado jogo #Dark cats 3 - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\app.py L110 
+[2023-07-14 13:47:58,519] INFO _log() L224  127.0.0.1 - - [14/Jul/2023 13:47:58] "DELETE /jogo?id=4 HTTP/1.1" 200 - - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-07-14 13:48:03,088] DEBUG get_jogos() L73   Coletando jogos  - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\app.py L73  
+[2023-07-14 13:48:03,094] DEBUG get_jogos() L83   3 rodutos econtrados - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\app.py L83  
+[2023-07-14 13:48:03,098] INFO _log() L224  127.0.0.1 - - [14/Jul/2023 13:48:03] "GET /jogos HTTP/1.1" 200 - - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-07-14 13:50:43,428] DEBUG add_jogo() L41   Adicionando jogo de nome: 'Dark cats 3' - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\app.py L41  
+[2023-07-14 13:50:43,514] DEBUG add_jogo() L50   Adicionado jogo de nome: 'Dark cats 3' - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\app.py L50  
+[2023-07-14 13:50:43,518] INFO _log() L224  127.0.0.1 - - [14/Jul/2023 13:50:43] "POST /jogo HTTP/1.1" 200 - - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-07-14 13:50:57,830] DEBUG get_jogos() L73   Coletando jogos  - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\app.py L73  
+[2023-07-14 13:50:57,836] DEBUG get_jogos() L83   4 rodutos econtrados - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\app.py L83  
+[2023-07-14 13:50:57,841] INFO _log() L224  127.0.0.1 - - [14/Jul/2023 13:50:57] "GET /jogos HTTP/1.1" 200 - - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-07-14 13:51:20,637] DEBUG del_jogo() L102  Deletando dados sobre jogo #Dark cats 3 - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\app.py L102 
+[2023-07-14 13:51:20,765] DEBUG del_jogo() L110  Deletado jogo #Dark cats 3 - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\app.py L110 
+[2023-07-14 13:51:20,769] INFO _log() L224  127.0.0.1 - - [14/Jul/2023 13:51:20] "DELETE /jogo?nome=Dark%20cats%203&id=1 HTTP/1.1" 200 - - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-07-14 13:51:44,588] DEBUG get_jogos() L73   Coletando jogos  - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\app.py L73  
+[2023-07-14 13:51:44,597] DEBUG get_jogos() L83   3 rodutos econtrados - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\app.py L83  
+[2023-07-14 13:51:44,603] INFO _log() L224  127.0.0.1 - - [14/Jul/2023 13:51:44] "GET /jogos HTTP/1.1" 200 - - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-07-14 13:51:58,619] DEBUG get_jogos() L73   Coletando jogos  - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\app.py L73  
+[2023-07-14 13:51:58,626] DEBUG get_jogos() L83   3 rodutos econtrados - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\app.py L83  
+[2023-07-14 13:51:58,632] INFO _log() L224  127.0.0.1 - - [14/Jul/2023 13:51:58] "GET /jogos HTTP/1.1" 200 - - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-07-14 13:52:20,272] DEBUG add_jogo() L41   Adicionando jogo de nome: 'teste' - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\app.py L41  
+[2023-07-14 13:52:20,363] DEBUG add_jogo() L50   Adicionado jogo de nome: 'teste' - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\app.py L50  
+[2023-07-14 13:52:20,363] INFO _log() L224  127.0.0.1 - - [14/Jul/2023 13:52:20] "POST /jogo HTTP/1.1" 200 - - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-07-14 13:52:25,367] DEBUG get_jogos() L73   Coletando jogos  - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\app.py L73  
+[2023-07-14 13:52:25,370] DEBUG get_jogos() L83   4 rodutos econtrados - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\app.py L83  
+[2023-07-14 13:52:25,373] INFO _log() L224  127.0.0.1 - - [14/Jul/2023 13:52:25] "GET /jogos HTTP/1.1" 200 - - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 

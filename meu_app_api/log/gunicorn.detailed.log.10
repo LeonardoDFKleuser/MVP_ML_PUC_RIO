@@ -1,0 +1,69 @@
+[2023-07-13 21:38:18,596] INFO _log() L224   * Restarting with stat - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-07-13 21:38:29,002] INFO _log() L224  127.0.0.1 - - [13/Jul/2023 21:38:29] "[35m[1mGET /openapi/swagger HTTP/1.1[0m" 500 - - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-07-13 21:38:29,108] INFO _log() L224  127.0.0.1 - - [13/Jul/2023 21:38:29] "[35m[1mGET /favicon.ico HTTP/1.1[0m" 500 - - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-07-13 21:38:29,166] ERROR _log() L224  Error on request:
+Traceback (most recent call last):
+  File "C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\serving.py", line 335, in run_wsgi
+    execute(self.server.app)
+  File "C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\serving.py", line 322, in execute
+    application_iter = app(environ, start_response)
+  File "C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\app.py", line 120, in <module>
+    s
+NameError: name 's' is not defined - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-07-13 21:38:29,166] ERROR _log() L224  Error on request:
+Traceback (most recent call last):
+  File "C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\serving.py", line 335, in run_wsgi
+    execute(self.server.app)
+  File "C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\serving.py", line 322, in execute
+    application_iter = app(environ, start_response)
+  File "C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\app.py", line 120, in <module>
+    s
+NameError: name 's' is not defined - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-07-13 21:38:32,319] INFO _log() L224  127.0.0.1 - - [13/Jul/2023 21:38:32] "[35m[1mGET /openapi/swagger HTTP/1.1[0m" 500 - - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-07-13 21:38:32,321] ERROR _log() L224  Error on request:
+Traceback (most recent call last):
+  File "C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\serving.py", line 335, in run_wsgi
+    execute(self.server.app)
+  File "C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\serving.py", line 322, in execute
+    application_iter = app(environ, start_response)
+  File "C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\app.py", line 120, in <module>
+    s
+NameError: name 's' is not defined - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-07-13 21:38:32,626] INFO _log() L224  127.0.0.1 - - [13/Jul/2023 21:38:32] "[35m[1mGET /favicon.ico HTTP/1.1[0m" 500 - - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-07-13 21:38:32,628] ERROR _log() L224  Error on request:
+Traceback (most recent call last):
+  File "C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\serving.py", line 335, in run_wsgi
+    execute(self.server.app)
+  File "C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\serving.py", line 322, in execute
+    application_iter = app(environ, start_response)
+  File "C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\app.py", line 120, in <module>
+    s
+NameError: name 's' is not defined - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-07-13 21:38:42,481] INFO _log() L224   * Detected change in 'C:\\Users\\facil\\Documents\\MVP\\MVP-PUC-RIO\\Sprint-1\\meu_app_api\\app.py', reloading - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-07-13 21:38:42,632] INFO _log() L224   * Restarting with stat - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-07-13 21:38:46,209] INFO _log() L224  127.0.0.1 - - [13/Jul/2023 21:38:46] "GET /openapi/swagger HTTP/1.1" 200 - - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-07-13 21:38:46,299] INFO _log() L224  127.0.0.1 - - [13/Jul/2023 21:38:46] "[36mGET /openapi/static/css/swagger-ui.css HTTP/1.1[0m" 304 - - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-07-13 21:38:46,467] INFO _log() L224  127.0.0.1 - - [13/Jul/2023 21:38:46] "[36mGET /openapi/static/js/swagger-ui-bundle.js HTTP/1.1[0m" 304 - - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-07-13 21:38:46,531] INFO _log() L224  127.0.0.1 - - [13/Jul/2023 21:38:46] "[36mGET /openapi/static/js/swagger-ui-standalone-preset.js HTTP/1.1[0m" 304 - - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-07-13 21:38:47,000] INFO _log() L224  127.0.0.1 - - [13/Jul/2023 21:38:47] "GET /openapi/openapi.json HTTP/1.1" 200 - - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-07-13 21:38:47,004] INFO _log() L224  127.0.0.1 - - [13/Jul/2023 21:38:47] "[36mGET /openapi/static/images/swagger.svg HTTP/1.1[0m" 304 - - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-07-13 21:39:13,846] DEBUG add_jogo() L41   Adicionando jogo de nome: 'Dark cats 3' - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\app.py L41  
+[2023-07-13 21:39:13,952] DEBUG add_jogo() L50   Adicionado jogo de nome: 'Dark cats 3' - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\app.py L50  
+[2023-07-13 21:39:13,956] INFO _log() L224  127.0.0.1 - - [13/Jul/2023 21:39:13] "POST /jogo HTTP/1.1" 200 - - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-07-13 21:39:21,933] DEBUG get_jogos() L73   Coletando jogos  - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\app.py L73  
+[2023-07-13 21:39:21,937] DEBUG get_jogos() L83   1 rodutos econtrados - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\app.py L83  
+[2023-07-13 21:39:21,939] INFO _log() L224  127.0.0.1 - - [13/Jul/2023 21:39:21] "GET /jogos HTTP/1.1" 200 - - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-07-13 21:39:35,469] DEBUG del_jogo() L102  Deletando dados sobre jogo #Dark cats 3 - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\app.py L102 
+[2023-07-13 21:39:35,574] DEBUG del_jogo() L110  Deletado jogo #Dark cats 3 - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\app.py L110 
+[2023-07-13 21:39:35,578] INFO _log() L224  127.0.0.1 - - [13/Jul/2023 21:39:35] "DELETE /jogo?nome=Dark%20cats%203&id=1 HTTP/1.1" 200 - - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-07-13 21:39:44,959] DEBUG get_jogos() L73   Coletando jogos  - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\app.py L73  
+[2023-07-13 21:39:44,969] INFO _log() L224  127.0.0.1 - - [13/Jul/2023 21:39:44] "GET /jogos HTTP/1.1" 200 - - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-07-13 21:42:57,151] DEBUG add_jogo() L41   Adicionando jogo de nome: 'teste' - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\app.py L41  
+[2023-07-13 21:42:57,232] DEBUG add_jogo() L50   Adicionado jogo de nome: 'teste' - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\app.py L50  
+[2023-07-13 21:42:57,235] INFO _log() L224  127.0.0.1 - - [13/Jul/2023 21:42:57] "POST /jogo HTTP/1.1" 200 - - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-07-13 22:14:56,690] DEBUG get_jogos() L73   Coletando jogos  - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\app.py L73  
+[2023-07-13 22:14:56,695] DEBUG get_jogos() L83   1 rodutos econtrados - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\app.py L83  
+[2023-07-13 22:14:56,697] INFO _log() L224  127.0.0.1 - - [13/Jul/2023 22:14:56] "GET /jogos HTTP/1.1" 200 - - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\env\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-07-13 22:15:03,536] DEBUG add_jogo() L41   Adicionando jogo de nome: 'teste 2' - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\app.py L41  
+[2023-07-13 22:15:03,639] DEBUG add_jogo() L50   Adicionado jogo de nome: 'teste 2' - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\app.py L50  
+[2023-07-13 22:44:46,814] DEBUG get_jogos() L73   Coletando jogos  - call_trace=C:\Users\facil\Documents\MVP\MVP-PUC-RIO\Sprint-1\meu_app_api\app.py L73  
