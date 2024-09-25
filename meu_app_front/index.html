@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE-edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <title>Catálogo</title>
+  </head>
+
+  <body>
+    <!-- Cabeçalho -->
+    <header>
+      <div>
+        <h2>Catálogo de Jogos</h2>
+      </div>
+      <div class="banner">
+        <img src=".\img\giphy.webp" alt="  error to load image" />
+      </div>
+    </header>
+
+    <!-- Opção para adicionar novos items -->
+    <section class="newGame">
+      <input type="text" id="newGameName" placeholder="Adicione novo Jogo" />
+      <select id="newPlatform" option="Plataforma">
+        <option value="" selected>Plataforma</option>
+        <option value="Pc">PC</option>
+        <option value="Playstation">Playstation</option>
+        <option value="Xbox">Xbox</option>
+        <option value="Nintendo">Nintendo</option>
+        <option value="Mobile">Mobile</option>
+      </select>
+      <select id="newStore" placeholder="Loja">
+        <option value="" selected>Loja</option>
+      </select>
+      <input type="number" id="newPrice" placeholder="Preço " />
+      <span onclick="newGame()" class="addBtn">Adicionar</span>
+    </section>
+
+    <!-- Tabela para exibição de itens cadastrados -->
+    <section class="games">
+      <table id="myGames">
+        <thead>
+          <tr>
+            <td>Nome</td>
+            <td>Plataforma</td>
+            <td>Loja</td>
+            <td>Preço</td>
+            <td>
+              <img
+                src=".\img\icons8-lixo.svg"
+                width="15px"
+                height="15px"
+                alt="Delete"
+              />
+            </td>
+          </tr>
+        </thead>
+        <tbody id="myGamesBody"></tbody>
+      </table>
+    </section>
+
+    <script src="scripts.js"></script>
+
+    <footer>
+      <img src=".\img\nian cat.gif" />
+    </footer>
+  </body>
+</html>

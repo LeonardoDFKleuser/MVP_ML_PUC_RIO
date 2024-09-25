@@ -1,0 +1,175 @@
+body {
+  background-image: linear-gradient(to bottom, blueviolet, black);
+}
+* {
+  font-family: Roboto, Comic Sans;
+}
+ul,
+li {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  background-color: blueviolet;
+}
+
+header {
+  text-align: center;
+  position: relative;
+  width: 100%;
+}
+
+.title {
+  color: blue;
+  width: 100%;
+  display: inline-block;
+  padding: 2px 0px;
+  position: sticky;
+  top: 0px;
+}
+
+.banner {
+  display: flex;
+  justify-content: center;
+}
+.banner img {
+  margin: 0px 0px 0px 0px;
+  width: auto;
+  height: auto;
+  max-height: 30vh;
+  overflow: hidden;
+}
+
+.newGame {
+  padding: 30px 40px;
+  color: rgb(255, 255, 255);
+  display: flex;
+  justify-content: center;
+}
+
+.newGame:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+#newGameName {
+  margin: 0;
+  background-color: rgb(180, 148, 210);
+  border: 1px solid rgb(35, 32, 24);
+  width: auto;
+  border-radius: 10px 0px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+#newGameName::placeholder {
+  color: black;
+}
+
+label {
+  display: block;
+}
+
+#newPlatform {
+  margin: 0;
+  background-color: rgb(180, 148, 210);
+  border: 1px solid rgb(35, 32, 24);
+  width: auto;
+  border-radius: 10px 0px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+#newStore {
+  margin: 0;
+  background-color: rgb(180, 148, 210);
+  border: 1px solid rgb(35, 32, 24);
+  width: auto;
+  border-radius: 10px 0px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+#newPrice {
+  margin: 0;
+  background-color: rgb(180, 148, 210);
+  border: 1px solid rgb(35, 32, 24);
+  width: auto;
+  border-radius: 10px 0px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+#newPrice::placeholder {
+  color: black;
+}
+
+.addBtn {
+  padding: 9px 10px;
+  background-color: rgb(70, 5, 45);
+  color: white;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 10px 0px;
+}
+
+.addBtn:hover {
+  background-color: #2d0466;
+  color: white;
+}
+
+.games {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.close:hover {
+  color: #360c8b;
+  font-weight: bolder;
+}
+
+td {
+  color: #e3b9e3;
+  padding: 12px 10px;
+  font-size: 18px;
+}
+
+table {
+  background-color: rgb(70, 5, 45);
+  width: 50%;
+  border: 1px solid blueviolet;
+}
+
+tr:nth-child(odd) {
+  background-color: rgb(70, 5, 45);
+}
+
+th:nth-child(1) {
+  width: 80%;
+}
+
+tr:hover {
+  background: #2d0466;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+}
+
+footer img {
+  margin: 0px 0px 0px 0px;
+  width: 5vh;
+  height: 5vh;
+  overflow: hidden;
+}
+
+.delete-item {
+  text-align: center;
+  cursor: pointer;
+}
