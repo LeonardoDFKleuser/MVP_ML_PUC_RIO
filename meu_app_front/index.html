@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" href="styles.css" />
 
-    <title>Catálogo</title>
+    <title>Catálogo de Jogos</title>
   </head>
 
   <body>
@@ -17,11 +17,11 @@
         <h2>Catálogo de Jogos</h2>
       </div>
       <div class="banner">
-        <img src=".\img\giphy.webp" alt="  error to load image" />
+        <img src=".\img\giphy.webp" alt="error to load image" />
       </div>
     </header>
 
-    <!-- Opção para adicionar novos items -->
+    <!-- Opção para adicionar novos itens -->
     <section class="newGame">
       <input type="text" id="newGameName" placeholder="Adicione novo Jogo" />
       <select id="newPlatform" option="Plataforma">
@@ -35,7 +35,7 @@
       <select id="newStore" placeholder="Loja">
         <option value="" selected>Loja</option>
       </select>
-      <input type="number" id="newPrice" placeholder="Preço " />
+      <input type="number" id="newPrice" placeholder="Preço" />
       <span onclick="newGame()" class="addBtn">Adicionar</span>
     </section>
 
@@ -48,6 +48,7 @@
             <td>Plataforma</td>
             <td>Loja</td>
             <td>Preço</td>
+            <td>Faixa de Preço</td> <!-- Coluna para a faixa de preço -->
             <td>
               <img
                 src=".\img\icons8-lixo.svg"

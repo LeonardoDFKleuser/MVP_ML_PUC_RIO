@@ -1,119 +1,162 @@
 from flask_openapi3 import OpenAPI, Info, Tag
-from flask import redirect
+from flask import redirect, request
 from urllib.parse import unquote
-
 from sqlalchemy.exc import IntegrityError
-
-from model import Session, Jogo, Comentario
-from logger import logger
+from model import Session, Jogo, Model  # Agora importa a classe Model para machine learning
 from schemas import *
 from flask_cors import CORS
+import pandas as pd
 
-info = Info(title="Minha API", version="1.0.0")
+# Instanciando o objeto OpenAPI
+info = Info(title="API Steam Machine Learning", version="1.0.0")
+
 app = OpenAPI(__name__, info=info)
 CORS(app)
 
-# definindo tags
+# Definindo tags para agrupamento das rotas
 home_tag = Tag(name="Documentação", description="Seleção de documentação: Swagger, Redoc ou RapiDoc")
-jogo_tag = Tag(name="Jogo", description="Adição, visualização e remoção de jogos à base")
-comentario_tag = Tag(name="Comentario", description="Adição de um comentário à um jogo cadastrado na base")
+jogo_tag = Tag(name="Jogo", description="Adição, visualização, remoção e predição de faixas de preço para jogos")
 
-
+# Rota home
 @app.get('/', tags=[home_tag])
 def home():
-    """Redireciona para /openapi, tela que permite a escolha do estilo de documentação.
-    """
+    """Redireciona para /openapi, tela que permite a escolha do estilo de documentação."""
     return redirect('/openapi')
 
 
-@app.post('/jogo', tags=[jogo_tag],
-          responses={"200": JogoViewSchema, "409": ErrorSchema, "400": ErrorSchema})
-def add_jogo(form: JogoSchema):
-    """Adiciona um novo jogo à base de dados
-
-    Publica uma representação dos jogos e comentários associados.
+# Rota de listagem de jogos
+@app.get('/jogos', tags=[jogo_tag],
+         responses={"200": ListagemJogoSchema, "404": ErrorSchema})
+def get_jogos():
+    """Lista todos os jogos cadastrados na base
+    Retorna uma lista de jogos cadastrados na base.
+    
+    Returns:
+        list: lista de jogos cadastrados na base
     """
+    session = Session()
+
+    # Buscando todos os jogos
+    jogos = session.query(Jogo).all()
+    
+    if not jogos:
+        return {"message": "Não há jogos cadastrados na base."}, 404
+    else:
+        return apresenta_jogos(jogos), 200
+
+
+# Rota de adição e predição de jogo
+@app.post('/jogo', tags=[jogo_tag],
+          responses={"200": JogoViewSchema, "400": ErrorSchema, "409": ErrorSchema})
+def predict_jogo(form: JogoSchema):
+    """Adiciona um novo jogo à base de dados e faz a predição da faixa de preço
+    Retorna a classificação do jogo em uma faixa de preço com base nos gêneros e categorias.
+    
+    Args:
+        nome (str): nome do jogo
+        plataforma (str): plataforma do jogo
+        loja (str): loja onde o jogo está sendo vendido
+        preco (float): preço do jogo
+        genres (str): gêneros do jogo
+        categories (str): categorias do jogo
+        
+    Returns:
+        dict: representação do jogo e faixa de preço prevista
+    """
+    
+    # Carregando o modelo de machine learning
+    try:
+        ml_path = 'ml_model/steam_model.pkl'  # Alterar o caminho conforme necessário
+        modelo = Model.carrega_modelo(ml_path)
+    except FileNotFoundError:
+        return {"message": "Erro ao carregar o modelo de machine learning"}, 400
+
+    # Montando os dados de entrada para predição
+    dados_jogo = {
+        'genres': [form.genres],  # Gêneros do jogo
+        'categories': [form.categories]  # Categorias do jogo
+    }
+
+    try:
+        # Criar um DataFrame com os novos dados para predição
+        entrada = pd.DataFrame(dados_jogo)
+
+        # Transformar as colunas de entrada em variáveis dummificadas
+        entrada_transformada = pd.get_dummies(entrada, drop_first=True)
+
+        # Garantir que as colunas de 'entrada_transformada' coincidam com o modelo treinado
+        entrada_transformada = entrada_transformada.reindex(columns=modelo.feature_names_in_, fill_value=0)
+
+        # Realiza a predição da faixa de preço
+        faixa_de_preco = modelo.predict(entrada_transformada)
+
+    except Exception as e:
+        return {"message": f"Erro na predição: {str(e)}"}, 400
+
+    # Criando o novo jogo e armazenando no banco de dados
     jogo = Jogo(
         nome=form.nome,
         plataforma=form.plataforma,
         loja=form.loja,
-        preco=form.preco)
-    logger.debug(f"Adicionando jogo de nome: '{jogo.nome}'")
+        preco=form.preco,
+        faixa_predita=faixa_de_preco[0]  # Usando o primeiro valor previsto
+    )
+    
     try:
-        # criando conexão com a base
+        # Criando conexão com a base
         session = Session()
-        # adicionando jogo
+        
+        # Adicionando o novo jogo à base
         session.add(jogo)
-        # efetivando o camando de adição de novo item na tabela
         session.commit()
-        session.refresh(jogo)
-        logger.debug(f"Adicionado jogo de nome: '{jogo.nome}'")
+        
         return apresenta_jogo(jogo), 200
 
-    except IntegrityError as e:
-        # como a duplicidade do nome é a provável razão do IntegrityError
-        error_msg = "jogo de mesmo nome já salvo na base :/"
-        logger.warning(f"Erro ao adicionar jogo '{jogo.nome}', {error_msg}")
+    except IntegrityError:
+        error_msg = "Jogo de mesmo nome já cadastrado na base."
         return {"message": error_msg}, 409
 
     except Exception as e:
-        # caso um erro fora do previsto
-        error_msg = "Não foi possível salvar novo item :/"
-        logger.warning(f"Erro ao adicionar jogo '{jogo.nome}', {error_msg}")
+        error_msg = f"Erro ao adicionar jogo à base: {str(e)}"
         return {"message": error_msg}, 400
 
 
-@app.get('/jogos', tags=[jogo_tag],
-         responses={"200": ListagemJogoSchema, "404": ErrorSchema})
-def get_jogos():
-    """Faz a busca por todos os jogos cadastrados
-
-    Retorna uma representação da listagem de jogos.
-    """
-    logger.debug(f"Coletando jogos ")
-    # criando conexão com a base
-    session = Session()
-    # fazendo a busca
-    jogos = session.query(Jogo).all()
-
-    if not jogos:
-        # se não há jogos cadastrados
-        return {"jogos": []}, 200
-    else:
-        logger.debug(f"%d rodutos econtrados" % len(jogos))
-        # retorna a representação de produto
-        print(jogos)
-        return apresenta_jogos(jogos), 200
-
-
+# Rota para remoção de um jogo pelo ID
 @app.delete('/jogo', tags=[jogo_tag],
             responses={"200": JogoDelSchema, "404": ErrorSchema})
-def del_jogo(query: JogoBuscaSchema):
-    """Deleta um Produto a partir do id do jogo informado
-
-    Retorna uma mensagem de confirmação da remoção.
-    """
-    jogo_id = query.id
-    jogo_nome = query.nome
-    print(jogo_id)
-    # criando conexão com a base
-    session = Session()
-    jogo = session.query(Jogo).filter(Jogo.id == jogo_id)
-    logger.debug(f"Deletando dados sobre jogo #{jogo_nome}")
+def delete_jogo(query: JogoBuscaSchema):
+    """Remove um jogo cadastrado na base a partir do ID
     
-    # fazendo a remoção
-    count = session.query(Jogo).filter(Jogo.id == jogo_id).delete()
-    session.commit()
+    Args:
+        id (int): ID do jogo
+        
+    Returns:
+        msg: Mensagem de sucesso ou erro
+    """
+    
+    try:
+        jogo_id = int(unquote(query.id))  # Converter o ID para um inteiro
+    
+        # Criando conexão com a base
+        session = Session()
+        
+        # Buscando o jogo pelo ID
+        jogo = session.query(Jogo).filter(Jogo.id == jogo_id).first()
+        
+        if not jogo:
+            error_msg = "O jogo não está cadastrado na base."
+            return {"message": error_msg}, 404
+        else:
+            session.delete(jogo)
+            session.commit()
+            return {"message": f"Jogo {jogo.nome} removido com sucesso."}, 200
 
-    if count:
-        # retorna a representação da mensagem de confirmação
-        logger.debug(f"Deletado jogo #{jogo_nome}")
-        return {"message": "jogo removido", "id": jogo_id}
-    else:
-        # se o jogo não foi encontrado
-        error_msg = "Jogo não encontrado na base :/"
-        logger.warning(f"Erro ao deletar jogo #'{jogo_id}', {jogo.nome}, {error_msg}")
-        return {"message": error_msg}, 404
+    except ValueError:
+        return {"message": "ID inválido."}, 400
+
+    except Exception as e:
+        return {"message": f"Erro ao remover o jogo: {str(e)}"}, 500
 
 
-
+if __name__ == '__main__':
+    app.run(debug=True)  # Ativar o modo de depuração
