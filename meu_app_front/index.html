@@ -36,6 +36,25 @@
         <option value="" selected>Loja</option>
       </select>
       <input type="number" id="newPrice" placeholder="Preço" />
+
+      <!-- Adicionando novos campos para Gêneros e Categorias -->
+      <select id="newGenres" multiple>
+        <option value="Action">Ação</option>
+        <option value="Adventure">Aventura</option>
+        <option value="RPG">RPG</option>
+        <option value="Simulation">Simulação</option>
+        <option value="Strategy">Estratégia</option>
+        <!-- Adicionar mais gêneros conforme necessário -->
+      </select>
+
+      <select id="newCategories" multiple>
+        <option value="Single-player">Single-player</option>
+        <option value="Multi-player">Multi-player</option>
+        <option value="Co-op">Co-op</option>
+        <option value="PvP">PvP</option>
+        <!-- Adicionar mais categorias conforme necessário -->
+      </select>
+
       <span onclick="newGame()" class="addBtn">Adicionar</span>
     </section>
 

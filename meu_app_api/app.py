@@ -57,8 +57,8 @@ def predict_jogo(form: JogoSchema):
         plataforma (str): plataforma do jogo
         loja (str): loja onde o jogo está sendo vendido
         preco (float): preço do jogo
-        genres (str): gêneros do jogo
-        categories (str): categorias do jogo
+        genres (list): gêneros do jogo
+        categories (list): categorias do jogo
         
     Returns:
         dict: representação do jogo e faixa de preço prevista
@@ -73,13 +73,13 @@ def predict_jogo(form: JogoSchema):
 
     # Montando os dados de entrada para predição
     dados_jogo = {
-        'genres': [form.genres],  # Gêneros do jogo
-        'categories': [form.categories]  # Categorias do jogo
+        'genres': ' '.join(form.genres),  # Convertendo a lista de gêneros para uma string
+        'categories': ' '.join(form.categories)  # Convertendo a lista de categorias para uma string
     }
 
     try:
         # Criar um DataFrame com os novos dados para predição
-        entrada = pd.DataFrame(dados_jogo)
+        entrada = pd.DataFrame([dados_jogo])
 
         # Transformar as colunas de entrada em variáveis dummificadas
         entrada_transformada = pd.get_dummies(entrada, drop_first=True)
@@ -123,7 +123,7 @@ def predict_jogo(form: JogoSchema):
 
 # Rota para remoção de um jogo pelo ID
 @app.delete('/jogo', tags=[jogo_tag],
-            responses={"200": JogoDelSchema, "404": ErrorSchema})
+            responses={"200": JogoDelSchema, "404": ErrorSchema, "400": ErrorSchema})
 def delete_jogo(query: JogoBuscaSchema):
     """Remove um jogo cadastrado na base a partir do ID
     
@@ -133,16 +133,15 @@ def delete_jogo(query: JogoBuscaSchema):
     Returns:
         msg: Mensagem de sucesso ou erro
     """
-    
     try:
-        jogo_id = int(unquote(query.id))  # Converter o ID para um inteiro
-    
+        jogo_id = query.id  # O ID já vem como inteiro no esquema `JogoBuscaSchema`
+
         # Criando conexão com a base
         session = Session()
-        
+
         # Buscando o jogo pelo ID
         jogo = session.query(Jogo).filter(Jogo.id == jogo_id).first()
-        
+
         if not jogo:
             error_msg = "O jogo não está cadastrado na base."
             return {"message": error_msg}, 404

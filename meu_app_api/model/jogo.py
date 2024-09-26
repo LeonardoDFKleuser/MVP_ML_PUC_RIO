@@ -3,7 +3,7 @@ from sqlalchemy.orm import relationship
 from datetime import datetime
 from typing import Union
 
-from  model import Base, Comentario
+from model import Base, Comentario
 
 
 class Jogo(Base):
@@ -15,23 +15,22 @@ class Jogo(Base):
     loja = Column(String(140))
     preco = Column(Float)
     data_insercao = Column(DateTime, default=datetime.now())
+    faixa_predita = Column(String(50))  # Nova coluna para armazenar a faixa predita
 
-    # Definição do relacionamento entre o jogo e o comentário.
-    # Essa relação é implicita, não está salva na tabela 'jogo',
-    # mas aqui estou deixando para SQLAlchemy a responsabilidade
-    # de reconstruir esse relacionamento.
+    # Definição do relacionamento entre o jogo e o comentário
     comentarios = relationship("Comentario")
 
-    def __init__(self, nome:str, plataforma:str, loja:str, preco:float,
-                 data_insercao:Union[DateTime, None] = None):
+    def __init__(self, nome: str, plataforma: str, loja: str, preco: float, faixa_predita: str,
+                 data_insercao: Union[DateTime, None] = None):
         """
         Cria um jogo
 
         Arguments:
-            nome: nome do jogo.
+            nome: nome do jogo
             plataforma: plataforma na qual o jogo foi adiquirido
             loja: loja na qual o jogo foi adquirido
             preco : valor esperado para o jogo
+            faixa_predita: faixa predita do preço do jogo (Baixo, Médio, Alto)
             data_insercao: data de quando o jogo foi inserido à base
         """
 
@@ -39,13 +38,8 @@ class Jogo(Base):
         self.plataforma = plataforma
         self.loja = loja
         self.preco = preco
+        self.faixa_predita = faixa_predita
 
-        # se não for informada, será o data exata da inserção no banco
+        # Se não for informada, será a data exata da inserção no banco
         if data_insercao:
             self.data_insercao = data_insercao
-
-    def adiciona_comentario(self, comentario:Comentario):
-        """ Adiciona um novo comentário ao jogo
-        """
-        self.comentarios.append(comentario)
-

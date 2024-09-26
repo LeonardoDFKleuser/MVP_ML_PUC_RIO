@@ -1,206 +1,80 @@
-/*
-  Função para obter uma lista existente no servidor preenchida previamente via requisição GET
-*/
-const getList = () => {
-  let url = "http://127.0.0.1:5000/jogos";  // Certifique-se de que o endpoint está correto
-  fetch(url, {
-    method: "get",
+function newGame() {
+  const gameName = document.getElementById("newGameName").value;
+  const platform = document.getElementById("newPlatform").value;
+  const store = document.getElementById("newStore").value;
+  const price = document.getElementById("newPrice").value;
+
+  // Capturando valores dos novos campos
+  const genresSelect = document.getElementById("newGenres");
+  const categoriesSelect = document.getElementById("newCategories");
+
+  // Captura as opções selecionadas para genres e categories
+  const genres = Array.from(genresSelect.selectedOptions).map(
+    (option) => option.value
+  );
+  const categories = Array.from(categoriesSelect.selectedOptions).map(
+    (option) => option.value
+  );
+
+  // Criação do objeto jogo
+  const newGame = {
+    nome: gameName,
+    plataforma: platform,
+    loja: store,
+    preco: parseFloat(price),
+    genres: genres, // Gêneros capturados
+    categories: categories, // Categorias capturadas
+  };
+
+  // Enviando dados para a API
+  fetch("http://localhost:5000/jogo", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(newGame),
   })
-    .then((response) => {
-      if (response.status != 200) {
-        throw response.json();  // Atualiza para verificar o status da resposta
-      }
-      return response.json();
-    })
+    .then((response) => response.json())
     .then((data) => {
-      // Garante que a lista de jogos está no formato esperado
-      if (data.jogos && Array.isArray(data.jogos)) {
-        data.jogos.forEach((item) =>
-          insertList(item.nome, item.plataforma, item.loja, item.preco, item.faixa_predita, item.id)  // Adiciona faixa_predita e id corretamente
-        );
+      // Atualiza a tabela com o novo jogo
+      if (data.message) {
+        console.error(data.message);
       } else {
-        console.error("Formato de resposta inesperado:", data);
-        alert("Erro ao carregar a lista de jogos");
+        addGameToTable(data);
       }
     })
     .catch((error) => {
-      console.error("Erro ao carregar lista de jogos:", error);
-      alert("Erro ao carregar lista de jogos");
+      console.error("Erro:", error);
     });
-};
+}
 
-/*
-  Chamada da função para carregamento inicial dos dados
-*/
-document.addEventListener("DOMContentLoaded", () => {
-  getList();  // Carregar a lista de jogos ao carregar a página
-});
+function addGameToTable(game) {
+  const table = document.getElementById("myGamesBody");
+  const row = table.insertRow();
+  row.insertCell(0).textContent = game.nome;
+  row.insertCell(1).textContent = game.plataforma;
+  row.insertCell(2).textContent = game.loja;
+  row.insertCell(3).textContent = game.preco;
+  row.insertCell(4).textContent = game.faixa_predita; // Mostrando a faixa de preço
+  row.insertCell(5).innerHTML =
+    '<img src=".imgicons8-lixo.svg" width="15px" height="15px" alt="Delete" onclick="deleteGame(' +
+    game.id +
+    ')">';
+}
 
-/*
-  Evento para exibição da lista de opções de loja com base na plataforma selecionada
-*/
-document.getElementById("newPlatform").addEventListener("change", function (event) {
-  let Loja = document.getElementById("newStore");
-
-  // Limpar as opções de loja anteriores
-  while (Loja.options.length > 0) {
-    Loja.remove(0);
-  }
-
-  if (!event.target.value) {
-    let lojaOption = document.createElement("option");
-    lojaOption.innerText = "Loja";
-    Loja.appendChild(lojaOption);
-    return;
-  }
-
-  // Adiciona as lojas com base na plataforma selecionada
-  for (const [plataforma, lojas] of Object.entries(Plataforma)) {
-    if (plataforma == event.target.value) {
-      for (const loja of lojas) {
-        let lojaOption = document.createElement("option");
-        lojaOption.innerText = loja;
-        lojaOption.value = loja;
-        Loja.appendChild(lojaOption);
-      }
-    }
-  }
-});
-
-/*
-  Função para inserir itens na lista apresentada
-*/
-const insertList = (gameName, gamePlatform, gameStore, gamePrice, gamePriceRange, gameId) => {
-  let tableBody = document.getElementById("myGamesBody");
-  let row = document.createElement("tr");
-
-  let gameNameCell = document.createElement("td");
-  gameNameCell.innerText = gameName;
-
-  let gamePlatformCell = document.createElement("td");
-  gamePlatformCell.innerText = gamePlatform;
-
-  let gameStoreCell = document.createElement("td");
-  gameStoreCell.innerText = gameStore;
-
-  let gamePriceCell = document.createElement("td");
-  gamePriceCell.innerText = gamePrice;
-
-  let gamePriceRangeCell = document.createElement("td");
-  gamePriceRangeCell.innerText = gamePriceRange;
-
-  let gameDeleteCell = document.createElement("td");
-  gameDeleteCell.innerHTML = "&times;";
-  gameDeleteCell.setAttribute("class", "delete-item");
-  gameDeleteCell.addEventListener("click", () => deleteItem(gameId, row));
-
-  row.appendChild(gameNameCell);
-  row.appendChild(gamePlatformCell);
-  row.appendChild(gameStoreCell);
-  row.appendChild(gamePriceCell);
-  row.appendChild(gamePriceRangeCell);
-  row.appendChild(gameDeleteCell);
-
-  tableBody.appendChild(row);
-};
-
-/*
-  Função para colocar um item na lista do servidor via requisição POST
-*/
-const postItem = (gameName, gamePlatform, gameStore, gamePrice) => {
-  const formData = new FormData();
-  formData.append("nome", gameName);
-  formData.append("plataforma", gamePlatform);
-  formData.append("loja", gameStore);
-  formData.append("preco", gamePrice);
-
-  let url = "http://127.0.0.1:5000/jogo";  // Certifique-se de que o endpoint está correto
-  fetch(url, {
-    method: "post",
-    body: formData,
+function deleteGame(gameId) {
+  fetch(`http://localhost:5000/jogo?id=${gameId}`, {
+    method: "DELETE",
   })
-    .then((response) => {
-      if (response.status != 200) {
-        if (response.body) {
-          throw response.json();
-        }
-        throw response;
-      }
-      return response.json();
-    })
+    .then((response) => response.json())
     .then((data) => {
-      // Inserir o jogo na tabela, incluindo a faixa de preço prevista
-      insertList(gameName, gamePlatform, gameStore, gamePrice, data.faixa_predita, data.id);
-      alert("Jogo adicionado!");
-    })
-    .catch(async (data) => {
-      let error = await data;
-      console.error("Error:", error);
-      alert(`Erro no cadastro: ${error.message}`);
-    });
-};
-
-// Função que é chamada quando o botão de adicionar é clicado
-const newGame = () => {
-  let gameName = document.getElementById("newGameName").value;
-  let gamePlatform = document.getElementById("newPlatform").value;
-  let gameStore = document.getElementById("newStore").value;
-  let gamePrice = document.getElementById("newPrice").value;
-
-  if (!gameName) {
-    alert("Escreva o nome de um jogo!");
-    return;
-  } else if (isNaN(parseFloat(gamePrice))) {
-    alert("Preço precisa ser um número!");
-    return;
-  } else {
-    postItem(gameName, gamePlatform, gameStore, gamePrice);  // Chama a função para enviar o POST
-  }
-};
-
-/*
-  Função para deletar um item da lista do servidor via requisição DELETE
-*/
-const deleteItem = (item, row) => {
-  let url = "http://127.0.0.1:5000/jogo?id=" + item;  // Certifique-se de que o ID está correto
-  fetch(url, {
-    method: "delete",
-  })
-    .then((response) => {
-      if (response.status != 200) {
-        throw response.body.message;
+      if (data.message) {
+        console.log(data.message);
+      } else {
+        document.getElementById(`game-row-${gameId}`).remove();
       }
-      return response.json();
-    })
-    .then(() => {
-      removeList(row);  // Remove a linha da tabela após exclusão
-      alert("Jogo removido com sucesso!");
     })
     .catch((error) => {
-      console.error("Error:", error);
+      console.error("Erro ao remover jogo:", error);
     });
-};
-
-// Função auxiliar para remover o jogo da tabela após exclusão
-const removeList = (row) => {
-  let tableBody = document.getElementById("myGamesBody");
-  tableBody.removeChild(row);
-};
-
-// Definição de Plataformas e Lojas para cadastro
-let Plataforma = {
-  Pc: [
-    "Steam",
-    "Epic",
-    "Ea Play",
-    "Ubisoft Connect",
-    "Battle.net",
-    "GOG",
-    "Xbox",
-    "Rockstar Laucher",
-  ],
-  Playstation: ["PlayStation Store"],
-  Xbox: ["Microsoft Store"],
-  Nintendo: ["Nintendo eShop"],
-  Mobile: ["Play Store", "Apple Store"],
-};
+}
