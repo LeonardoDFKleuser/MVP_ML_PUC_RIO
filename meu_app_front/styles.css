@@ -52,7 +52,12 @@ header {
   clear: both;
 }
 
-#newGameName {
+#newGameName,
+#newPlatform,
+#newStore,
+#newPrice,
+#newGenres,
+#newCategories {
   margin: 0;
   background-color: rgb(180, 148, 210);
   border: 1px solid rgb(35, 32, 24);
@@ -62,45 +67,16 @@ header {
   font-size: 16px;
 }
 
-#newGameName::placeholder {
+#newGameName::placeholder,
+#newPrice::placeholder {
   color: black;
 }
 
-label {
-  display: block;
-}
-
-#newPlatform {
-  margin: 0;
-  background-color: rgb(180, 148, 210);
-  border: 1px solid rgb(35, 32, 24);
+#newGenres,
+#newCategories {
   width: auto;
-  border-radius: 10px 0px;
-  padding: 10px;
-  font-size: 16px;
-}
-
-#newStore {
-  margin: 0;
+  height: 100px; /* Definir uma altura apropriada para múltiplas seleções */
   background-color: rgb(180, 148, 210);
-  border: 1px solid rgb(35, 32, 24);
-  width: auto;
-  border-radius: 10px 0px;
-  padding: 10px;
-  font-size: 16px;
-}
-
-#newPrice {
-  margin: 0;
-  background-color: rgb(180, 148, 210);
-  border: 1px solid rgb(35, 32, 24);
-  width: auto;
-  border-radius: 10px 0px;
-  padding: 10px;
-  font-size: 16px;
-}
-
-#newPrice::placeholder {
   color: black;
 }
 

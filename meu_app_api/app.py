@@ -99,6 +99,8 @@ def predict_jogo(form: JogoSchema):
         plataforma=form.plataforma,
         loja=form.loja,
         preco=form.preco,
+        generos=' '.join(form.genres),  # Salvando gêneros como string
+        categorias=' '.join(form.categories),  # Salvando categorias como string
         faixa_predita=faixa_de_preco[0]  # Usando o primeiro valor previsto
     )
     
@@ -119,6 +121,7 @@ def predict_jogo(form: JogoSchema):
     except Exception as e:
         error_msg = f"Erro ao adicionar jogo à base: {str(e)}"
         return {"message": error_msg}, 400
+
 
 
 # Rota para remoção de um jogo pelo ID

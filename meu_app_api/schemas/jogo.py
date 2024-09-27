@@ -27,7 +27,7 @@ class ListagemJogoSchema(BaseModel):
 
 def apresenta_jogos(jogos: List[Jogo]):
     """ Retorna uma representação do jogo seguindo o schema definido em
-        JogoViewSchema.
+        JogoViewSchema, incluindo os campos de gêneros e categorias.
     """
     result = []
     for jogo in jogos:
@@ -36,10 +36,13 @@ def apresenta_jogos(jogos: List[Jogo]):
             "plataforma": jogo.plataforma,
             "loja": jogo.loja,
             "preco": jogo.preco,
+            "generos": jogo.generos,  # Adicionando o campo gêneros
+            "categorias": jogo.categorias,  # Adicionando o campo categorias
             "id": jogo.id,
         })
 
     return {"jogos": result}
+
 
 class JogoViewSchema(BaseModel):
     """ Define como um jogo será retornado: jogo + comentários.
@@ -60,8 +63,8 @@ class JogoDelSchema(BaseModel):
     nome: str
 
 def apresenta_jogo(jogo: Jogo):
-    """ Retorna uma representação do produto seguindo o schema definido em
-        ProdutoViewSchema.
+    """ Retorna uma representação do jogo seguindo o schema definido em
+        JogoViewSchema, incluindo os campos de gêneros e categorias.
     """
     return {
         "id": jogo.id,
@@ -69,6 +72,9 @@ def apresenta_jogo(jogo: Jogo):
         "plataforma": jogo.plataforma,
         "loja": jogo.loja,
         "preco": jogo.preco,
+        "generos": jogo.generos,  # Adicionando o campo gêneros
+        "categorias": jogo.categorias,  # Adicionando o campo categorias
         "total_comentarios": len(jogo.comentarios),
         "comentarios": [{"texto": c.texto} for c in jogo.comentarios]
     }
+

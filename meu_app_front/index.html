@@ -2,14 +2,11 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE-edge" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <link rel="stylesheet" href="styles.css" />
-
     <title>Catálogo de Jogos</title>
   </head>
-
   <body>
     <!-- Cabeçalho -->
     <header>
@@ -24,6 +21,7 @@
     <!-- Opção para adicionar novos itens -->
     <section class="newGame">
       <input type="text" id="newGameName" placeholder="Adicione novo Jogo" />
+
       <select id="newPlatform" option="Plataforma">
         <option value="" selected>Plataforma</option>
         <option value="Pc">PC</option>
@@ -32,27 +30,29 @@
         <option value="Nintendo">Nintendo</option>
         <option value="Mobile">Mobile</option>
       </select>
+
       <select id="newStore" placeholder="Loja">
         <option value="" selected>Loja</option>
       </select>
+
       <input type="number" id="newPrice" placeholder="Preço" />
 
-      <!-- Adicionando novos campos para Gêneros e Categorias -->
-      <select id="newGenres" multiple>
-        <option value="Action">Ação</option>
-        <option value="Adventure">Aventura</option>
+      <!-- Campos novos de Gêneros e Categorias -->
+      <select id="newGenres" option="newGenres">
+        <option value="" selected>Gêneros</option>
+        <option value="Ação">Ação</option>
+        <option value="Aventura">Aventura</option>
         <option value="RPG">RPG</option>
-        <option value="Simulation">Simulação</option>
-        <option value="Strategy">Estratégia</option>
-        <!-- Adicionar mais gêneros conforme necessário -->
+        <option value="Simulação">Simulação</option>
+        <option value="Esportes">Esportes</option>
       </select>
 
-      <select id="newCategories" multiple>
+      <select id="newCategories" option="newCategories">
+        <option value="" selected>Categorias</option>
         <option value="Single-player">Single-player</option>
         <option value="Multi-player">Multi-player</option>
         <option value="Co-op">Co-op</option>
         <option value="PvP">PvP</option>
-        <!-- Adicionar mais categorias conforme necessário -->
       </select>
 
       <span onclick="newGame()" class="addBtn">Adicionar</span>
@@ -67,7 +67,9 @@
             <td>Plataforma</td>
             <td>Loja</td>
             <td>Preço</td>
-            <td>Faixa de Preço</td> <!-- Coluna para a faixa de preço -->
+            <td>Gêneros</td> <!-- Nova coluna para gêneros -->
+            <td>Categorias</td> <!-- Nova coluna para categorias -->
+            <td>Faixa de Preço</td> <!-- Nova coluna para faixa de preço -->
             <td>
               <img
                 src=".\img\icons8-lixo.svg"
