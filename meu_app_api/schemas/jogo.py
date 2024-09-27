@@ -26,21 +26,19 @@ class ListagemJogoSchema(BaseModel):
     jogos: List[JogoSchema]
 
 def apresenta_jogos(jogos: List[Jogo]):
-    """ Retorna uma representação do jogo seguindo o schema definido em
-        JogoViewSchema, incluindo os campos de gêneros e categorias.
-    """
+    """ Retorna uma representação dos jogos seguindo o schema definido em JogoViewSchema. """
     result = []
     for jogo in jogos:
         result.append({
+            "id": jogo.id,
             "nome": jogo.nome,
             "plataforma": jogo.plataforma,
             "loja": jogo.loja,
             "preco": jogo.preco,
-            "generos": jogo.generos,  # Adicionando o campo gêneros
-            "categorias": jogo.categorias,  # Adicionando o campo categorias
-            "id": jogo.id,
+            "generos": jogo.generos.split() if isinstance(jogo.generos, str) else jogo.generos,
+            "categorias": jogo.categorias.split() if isinstance(jogo.categorias, str) else jogo.categorias,
+            "faixa_predita": jogo.faixa_predita  # Incluindo o campo faixa_predita
         })
-
     return {"jogos": result}
 
 
@@ -63,17 +61,16 @@ class JogoDelSchema(BaseModel):
     nome: str
 
 def apresenta_jogo(jogo: Jogo):
-    """ Retorna uma representação do jogo seguindo o schema definido em
-        JogoViewSchema, incluindo os campos de gêneros e categorias.
-    """
+    """ Retorna uma representação do jogo seguindo o schema definido em JogoViewSchema. """
     return {
         "id": jogo.id,
         "nome": jogo.nome,
         "plataforma": jogo.plataforma,
         "loja": jogo.loja,
         "preco": jogo.preco,
-        "generos": jogo.generos,  # Adicionando o campo gêneros
-        "categorias": jogo.categorias,  # Adicionando o campo categorias
+        "generos": jogo.generos.split() if isinstance(jogo.generos, str) else jogo.generos,
+        "categorias": jogo.categorias.split() if isinstance(jogo.categorias, str) else jogo.categorias,
+        "faixa_predita": jogo.faixa_predita,  # Garantindo que faixa_predita seja retornado
         "total_comentarios": len(jogo.comentarios),
         "comentarios": [{"texto": c.texto} for c in jogo.comentarios]
     }

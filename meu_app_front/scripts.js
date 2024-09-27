@@ -17,13 +17,15 @@ const getList = () => {
     .then((data) => {
       data.jogos.forEach((item) =>
         insertList(
-          item.nome, 
-          item.plataforma, 
-          item.loja, 
-          item.preco, 
-          item.genres,  // Adicionando gêneros
-          item.categories,  // Adicionando categorias
-          item.faixa_predita,  // Adicionando faixa de preço prevista
+          item.nome,
+          item.plataforma,
+          item.loja,
+          item.preco,
+          Array.isArray(item.generos) ? item.generos : item.generos.split(" "), // Verificando se já é um array, caso contrário, dividir
+          Array.isArray(item.categorias)
+            ? item.categorias
+            : item.categorias.split(" "), // Verificando se já é um array, caso contrário, dividir
+          item.faixa_predita || "", // Adicionando faixa de preço prevista se existir
           item.id
         )
       );
@@ -32,7 +34,6 @@ const getList = () => {
       console.error("Error:", error);
     });
 };
-
 
 /*
   --------------------------------------------------------------------------------------
@@ -95,34 +96,43 @@ document
 
 /*
   --------------------------------------------------------------------------------------
-  Função para inserir items na lista apresentada
+  Função para inserir itens na lista apresentada
   --------------------------------------------------------------------------------------
 */
-const insertList = (gameName, gamePlatform, gameStore, gamePrice, gameGenres, gameCategories, gamePriceRange, gameId) => {
+const insertList = (
+  gameName,
+  gamePlatform,
+  gameStore,
+  gamePrice,
+  gameGenres,
+  gameCategories,
+  gamePriceRange,
+  gameId
+) => {
   let tableBody = document.getElementById("myGamesBody");
   let row = document.createElement("tr");
 
   // Adicionando as colunas com as novas informações
   let gameNameCell = document.createElement("td");
   gameNameCell.innerText = gameName;
-  
+
   let gamePlatformCell = document.createElement("td");
   gamePlatformCell.innerText = gamePlatform;
-  
+
   let gameStoreCell = document.createElement("td");
   gameStoreCell.innerText = gameStore;
-  
+
   let gamePriceCell = document.createElement("td");
   gamePriceCell.innerText = gamePrice;
-  
+
   let gameGenresCell = document.createElement("td");
-  gameGenresCell.innerText = gameGenres.join(", ");  // Exibir os gêneros separados por vírgula
-  
+  gameGenresCell.innerText = gameGenres.join(", "); // Exibir os gêneros separados por vírgula
+
   let gameCategoriesCell = document.createElement("td");
-  gameCategoriesCell.innerText = gameCategories.join(", ");  // Exibir as categorias separadas por vírgula
-  
+  gameCategoriesCell.innerText = gameCategories.join(", "); // Exibir as categorias separadas por vírgula
+
   let gamePriceRangeCell = document.createElement("td");
-  gamePriceRangeCell.innerText = gamePriceRange;  // Exibir faixa de preço prevista
+  gamePriceRangeCell.innerText = gamePriceRange; // Exibir faixa de preço prevista
 
   // Botão de deletar
   let gameDeleteCell = document.createElement("td");
@@ -135,9 +145,9 @@ const insertList = (gameName, gamePlatform, gameStore, gamePrice, gameGenres, ga
   row.appendChild(gamePlatformCell);
   row.appendChild(gameStoreCell);
   row.appendChild(gamePriceCell);
-  row.appendChild(gameGenresCell);  // Nova célula de gêneros
-  row.appendChild(gameCategoriesCell);  // Nova célula de categorias
-  row.appendChild(gamePriceRangeCell);  // Nova célula de faixa de preço
+  row.appendChild(gameGenresCell); // Nova célula de gêneros
+  row.appendChild(gameCategoriesCell); // Nova célula de categorias
+  row.appendChild(gamePriceRangeCell); // Nova célula de faixa de preço
   row.appendChild(gameDeleteCell);
 
   // Adicionando a linha à tabela
@@ -152,14 +162,22 @@ const insertList = (gameName, gamePlatform, gameStore, gamePrice, gameGenres, ga
 /*
   Função para colocar um item na lista do servidor via requisição POST
 */
-const postItem = (gameName, gamePlatform, gameStore, gamePrice, gameGenres, gameCategories) => {
+const postItem = (
+  gameName,
+  gamePlatform,
+  gameStore,
+  gamePrice,
+  gameGenres,
+  gameCategories
+) => {
   const formData = new FormData();
-  formData.append("nome", String(gameName));  // Garantindo que o nome seja uma string
+  formData.append("nome", String(gameName)); // Garantindo que o nome seja uma string
   formData.append("plataforma", gamePlatform);
   formData.append("loja", gameStore);
-  formData.append("preco", parseFloat(gamePrice));  // Convertendo o preço para float
-  formData.append("genres", JSON.stringify(gameGenres));  // Serializando arrays
-  formData.append("categories", JSON.stringify(gameCategories));  // Serializando arrays
+  formData.append("preco", parseFloat(gamePrice)); // Convertendo o preço para float
+  // Enviar as listas diretamente
+  formData.append("genres", gameGenres); // Enviar os gêneros diretamente
+  formData.append("categories", gameCategories); // Enviar as categorias diretamente
 
   let url = "http://127.0.0.1:5000/jogo";
   fetch(url, {
@@ -176,7 +194,16 @@ const postItem = (gameName, gamePlatform, gameStore, gamePrice, gameGenres, game
       return response.json();
     })
     .then((data) => {
-      insertList(gameName, gamePlatform, gameStore, gamePrice, data.id);
+      insertList(
+        gameName,
+        gamePlatform,
+        gameStore,
+        gamePrice,
+        gameGenres,
+        gameCategories,
+        data.faixa_predita || "", // Verificar faixa predita
+        data.id
+      );
       alert("Item adicionado!");
     })
     .catch(async (data) => {
@@ -190,12 +217,16 @@ const postItem = (gameName, gamePlatform, gameStore, gamePrice, gameGenres, game
   Função para adicionar um novo item com Nome, Plataforma, Loja, Gêneros, Categorias e valor
 */
 const newGame = () => {
-  let gameName = document.getElementById("newGameName").value.trim();  // Garantir que seja uma string e remover espaços extras
+  let gameName = document.getElementById("newGameName").value.trim(); // Garantir que seja uma string e remover espaços extras
   let gamePlatform = document.getElementById("newPlatform").value;
   let gameStore = document.getElementById("newStore").value;
   let gamePrice = document.getElementById("newPrice").value;
-  let gameGenres = Array.from(document.getElementById("newGenres").selectedOptions).map(option => option.value);
-  let gameCategories = Array.from(document.getElementById("newCategories").selectedOptions).map(option => option.value);
+  let gameGenres = Array.from(
+    document.getElementById("newGenres").selectedOptions
+  ).map((option) => option.value);
+  let gameCategories = Array.from(
+    document.getElementById("newCategories").selectedOptions
+  ).map((option) => option.value);
 
   if (!gameName) {
     alert("Escreva o nome de um item!");
@@ -204,7 +235,14 @@ const newGame = () => {
     alert("Preço precisa ser um número!");
     return;
   } else {
-    postItem(gameName, gamePlatform, gameStore, gamePrice, gameGenres, gameCategories);
+    postItem(
+      gameName,
+      gamePlatform,
+      gameStore,
+      gamePrice,
+      gameGenres,
+      gameCategories
+    );
   }
 };
 

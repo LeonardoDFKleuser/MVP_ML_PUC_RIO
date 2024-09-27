@@ -13,12 +13,12 @@ class Jogo(Base):
     plataforma = Column(String(140))
     loja = Column(String(140))
     preco = Column(Float)
-    generos = Column(String)  # Adicionando campo para gêneros
-    categorias = Column(String)  # Adicionando campo para categorias
-    faixa_predita = Column(String)  # Adicionando campo para faixa de preço predita
+    generos = Column(String)  # Campo para gêneros
+    categorias = Column(String)  # Campo para categorias
+    faixa_predita = Column(String)  # Campo para faixa de preço predita
     data_insercao = Column(DateTime, default=datetime.now())
 
-    # Definição do relacionamento entre o jogo e o comentário.
+    # Relacionamento entre o jogo e os comentários
     comentarios = relationship("Comentario")
 
     def __init__(self, nome: str, plataforma: str, loja: str, preco: float, generos: str, categorias: str,
