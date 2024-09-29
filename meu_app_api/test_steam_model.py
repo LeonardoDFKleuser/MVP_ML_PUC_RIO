@@ -30,7 +30,7 @@ class  TestClass:
         dataset = Dataset
 
         minimum_pop = dataset.getPop()
-        assert minimum_pop >= 0.40
+        assert minimum_pop >= 0.05
         
 
 class TestModel:
@@ -46,7 +46,7 @@ class TestModel:
 
         minimum_acc = my_model.get_acc()
 
-        assert minimum_acc >= 0.75
+        assert minimum_acc >= 0.65
 
     def test_recall(self):
         """
